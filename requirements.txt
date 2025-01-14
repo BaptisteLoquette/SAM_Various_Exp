@@ -1,0 +1,10 @@
+matplotlib==3.5.1
+numpy==1.21.5
+opencv_python==4.10.0.84
+Pillow==9.0.1
+Pillow==11.1.0
+segment_anything==1.0
+streamlit==1.41.1
+streamlit_extras==0.5.0
+torch==2.5.1
+tqdm==4.67.1
