@@ -13,6 +13,7 @@ def upload_image(uploaded_file):
     try:
         # Convertir l'image téléchargée en objet PIL Image
         image = Image.open(uploaded_file)
+        image = image.resize((512, 512))
         
         # Convertir l'image en tableau numpy
         image_array = np.array(image)
