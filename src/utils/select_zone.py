@@ -7,7 +7,7 @@ def select_bbox_zone(image):
     """
     Slect Zone Fonction either with lasso or box
     Args:
-        image (PIL.Image): Image on which we'll select
+        image (PIL.Image): Image on which we'll select the wanted zone
     Returns:
         dict: Json result of selection
     """
@@ -15,9 +15,8 @@ def select_bbox_zone(image):
         "Selection Type", ["lasso", "box"], index=1, horizontal=True
     )
 
-    selection = image_selector(image=image, selection_type=selection_type)
+    selection = image_selector(image=image, selection_type=selection_type, width = 500, height = 500)
     if selection:
-        st.json(selection, expanded=False)
-        show_selection(image, selection)
+        #show_selection(image, selection)
         return selection
     return None
