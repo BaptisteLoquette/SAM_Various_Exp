@@ -53,12 +53,18 @@ def main():
             if st.session_state.task_selection == "full_image":
                 st.image(image_array)
 
+                # Créer une boîte englobante pour l'image entière
+                h, w = image_array.shape[:2]
+                box = np.array([0, 0, w, h])
+                
                 masks, scores, logits = PREDICTOR.predict(
-                        point_coords=None,
-                        point_labels=None,
-                        box=image_array[None, :],
-                        multimask_output=False,
-                    )
+                    point_coords=None,
+                    point_labels=None,
+                    box=box,
+                    multimask_output=False,
+                )
+
+                show_segmentation(image_array, masks[0])
 
                 
             elif st.session_state.task_selection == "bbox":
