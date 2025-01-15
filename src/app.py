@@ -71,6 +71,7 @@ def main():
                 st.session_state.task_selection = "bbox"
                 # Select Zone
                 json_results = select_bbox_zone(image)
+                print(json_results)
 
                 pos_bboxes = json_results["selection"]["box"]
 
@@ -91,15 +92,20 @@ def main():
                     # Découper l'image avec les bonnes coordonnées
                     bbox_array = image_array[bbox_y[0]:bbox_y[1], bbox_x[0]:bbox_x[1], :]
 
-
+                    # Créer le format de boîte englobante attendu par SAM
+                    box = np.array([bbox_x[0],
+                                    bbox_y[0],
+                                    bbox_x[1], 
+                                    bbox_y[1]])
+                    
                     masks, scores, logits = PREDICTOR.predict(
                         point_coords=None,
                         point_labels=None,
-                        box=bbox_array[None, :],
+                        box=box,  # Passer les coordonnées de la boîte au lieu de l'image
                         multimask_output=False,
                     )
 
-                    show_segmentation(bbox_array, masks[0])
+                    show_segmentation(image_array, masks[0])
 
                     #st.image(bbox_array)
 
